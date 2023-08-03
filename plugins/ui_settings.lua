@@ -9,7 +9,8 @@ return {
             tabline = nil,
             winbar = nil,
             statusline = nil
-        }, {"Bekaboo/dropbar.nvim", event = "VeryLazy", opts = {}}, -- {
+        }, -- {"Bekaboo/dropbar.nvim", event = "VeryLazy", opts = {}}, -- 
+        -- {
         --     "utilyre/barbecue.nvim",
         --     name = "barbecue",
         --     version = "*",
@@ -38,7 +39,23 @@ return {
                         text = '        File Explorer'
                     }
                 },
-                icons = {preset = 'default'},
+                icons = {
+                    diagnostics = {
+                        [vim.diagnostic.severity.ERROR] = {
+                            enabled = true,
+                            icon = 'ﬀ'
+                        },
+                        [vim.diagnostic.severity.WARN] = {enabled = false},
+                        [vim.diagnostic.severity.INFO] = {enabled = false},
+                        [vim.diagnostic.severity.HINT] = {enabled = true}
+                    }
+                    -- gitsigns = {
+                    --     added = {enabled = true, icon = '+'},
+                    --     changed = {enabled = true, icon = '~'},
+                    --     deleted = {enabled = true, icon = '-'}
+                    -- }
+                },
+                maximum_length = 25,
                 no_name_title = nil
             }
         }
@@ -171,17 +188,17 @@ return {
             })
         end
     }, {
-        {
-            "levouh/tint.nvim",
-            event = "User AstroFile",
-            opts = {
-                highlight_ignore_patterns = {
-                    "WinSeparator", "neo-tree", "Status.*"
-                },
-                tint = -70, -- Darken colors, use a positive value to brighten
-                saturation = 0.6 -- Saturation to preserve
-            }
-        }
+        -- {
+        --     "levouh/tint.nvim",
+        --     event = "User AstroFile",
+        --     opts = {
+        --         highlight_ignore_patterns = {
+        --             "WinSeparator", "neo-tree", "Status.*"
+        --         },
+        --         tint = -70, -- Darken colors, use a positive value to brighten
+        --         saturation = 0.6 -- Saturation to preserve
+        --     }
+        -- }
     }, {
         "goolord/alpha-nvim",
         opts = function(_, opts)
