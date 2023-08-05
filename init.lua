@@ -23,16 +23,4 @@ return {
             -- url_format = 'https://hub.gitmirror.com/https://github.com/%s.git'
         }
     }
-    -- barbar = {utils = {hl = {attributes = {italic = false}}}},
-    -- vim.api.nvim_create_autocmd('Colorscheme', {
-    --     group = vim.api.nvim_create_augroup('config_custom_highlights', {}),
-    --     callback = function()
-    --         vim.api.nvim_set_hl(0, 'BufferCurrentADDED',
-    --                             {fg = '#7EA662', italic = false})
-    --         vim.api.nvim_set_hl(0, 'BufferCurrentCHANGED',
-    --                             {fg = '#4FA6ED', italic = false})
-    --         vim.api.nvim_set_hl(0, 'BufferCurrentDELETED',
-    --                             {fg = '#E55561', italic = false})
-    --     end
-    -- })
 }
