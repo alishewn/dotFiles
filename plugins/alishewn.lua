@@ -210,6 +210,6 @@ return {
             }
         }
     }, {"jabirali/vim-tmux-yank", event = "User AstroFile"},
-    {"willothy/flatten.nvim", opts = {}, lazy = false, priority = 1001}
-    -- {"karb94/neoscroll.nvim", event = "VeryLazy", opts = {}}
+    {"willothy/flatten.nvim", opts = {}, lazy = false, priority = 1001},
+    {"SmiteshP/nvim-navic", dependencies = "neovim/nvim-lspconfig"}
 }
