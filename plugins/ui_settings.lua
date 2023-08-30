@@ -1,3 +1,4 @@
+local utils = require "astronvim.utils"
 return {
     ---------------------------------------------------------------------------------------
     ---------------------------------------------------------------------------------------
@@ -78,7 +79,7 @@ return {
                 sections = {
                     lualine_a = {{"fancy_mode", width = 3}},
                     lualine_b = {{"branch", icon = ""}, {"fancy_diff"}},
-                    lualine_c = {{"fancy_cwd", substitute_home = true}},
+                    lualine_c = {{"filename", path = 3}},
                     lualine_x = {{"fancy_lsp_servers"}},
                     lualine_y = {
                         {"fancy_filetype", ts_icon = ""}, {"fancy_macro"},
@@ -227,5 +228,53 @@ return {
             }
             return opts
         end
-    }, {"aserowy/tmux.nvim", event = "VeryLazy", opts = {}}
+    }, {"aserowy/tmux.nvim", event = "VeryLazy", opts = {}}, {
+        "nvim-treesitter/nvim-treesitter",
+        opts = function(_, opts)
+            if opts.ensure_installed ~= "all" then
+                opts.ensure_installed = utils.list_insert_unique(
+                                            opts.ensure_installed, {
+                        "bash", "markdown", "markdown_inline", "regex", "vim"
+                    })
+            end
+        end
+    }, {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        cond = not vim.g.neovide,
+        dependencies = {"MunifTanjim/nui.nvim"},
+        opts = {
+            lsp = {
+                progress = {enabled = false},
+                signature = {enabled = false},
+                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true
+                }
+            },
+            presets = {
+                bottom_search = true, -- use a classic bottom cmdline for search
+                command_palette = true, -- position the cmdline and popupmenu together
+                long_message_to_split = true, -- long messages will be sent to a split
+                inc_rename = false, -- enables an input dialog for inc-rename.nvim
+                lsp_doc_border = false -- add a border to hover docs and signature help
+            }
+        },
+        init = function() vim.g.lsp_handlers_enabled = false end
+    }, {
+        "folke/edgy.nvim",
+        optional = true,
+        opts = function(_, opts)
+            if not opts.bottom then opts.bottom = {} end
+            table.insert(opts.bottom, {
+                ft = "noice",
+                size = {height = 0.4},
+                filter = function(_, win)
+                    return vim.api.nvim_win_get_config(win).relative == ""
+                end
+            })
+        end
+    }
 }

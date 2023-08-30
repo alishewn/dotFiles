@@ -1,98 +1,47 @@
 return {
+    -- {
+    --     "smjonas/inc-rename.nvim",
+    --     opts = {},
+    --     keys = {
+    --         {
+    --             "<leader>lr",
+    --             function()
+    --                 require "inc_rename"
+    --                 return ":IncRename " .. vim.fn.expand "<cword>"
+    --             end,
+    --             expr = true,
+    --             desc = "IncRename"
+    --         }
+    --     }
+    -- },
     {
-        "smjonas/inc-rename.nvim",
-        opts = {},
-        keys = {
-            {
-                "<leader>lr",
-                function()
-                    require "inc_rename"
-                    return ":IncRename " .. vim.fn.expand "<cword>"
-                end,
-                expr = true,
-                desc = "IncRename"
-            }
-        }
-    }, {
-        {
-            "lvimuser/lsp-inlayhints.nvim",
-            init = function()
-                vim.api.nvim_create_autocmd("LspAttach", {
-                    group = vim.api.nvim_create_augroup("LspAttach_inlayhints",
-                                                        {}),
-                    callback = function(args)
-                        if not (args.data and args.data.client_id) then
-                            return
-                        end
-                        local client = vim.lsp.get_client_by_id(args.data
-                                                                    .client_id)
-                        if client.server_capabilities.inlayHintProvider then
-                            local inlayhints = require "lsp-inlayhints"
-                            inlayhints.on_attach(client, args.buf)
-                            require("astronvim.utils").set_mappings({
-                                n = {
-                                    ["<leader>uH"] = {
-                                        inlayhints.toggle,
-                                        desc = "Toggle inlay hints"
-                                    }
-                                }
-                            }, {buffer = args.buf})
-                        end
-                    end
-                })
-            end,
-            opts = {}
-        }, {
-            "p00f/clangd_extensions.nvim",
-            optional = true,
-            opts = {extensions = {autoSetHints = false}}
-        }, {
-            "simrat39/rust-tools.nvim",
-            optional = true,
-            opts = {tools = {inlay_hints = {auto = false}}}
-        }
-    }, {
-        {
-            "lvimuser/lsp-inlayhints.nvim",
-            init = function()
-                vim.api.nvim_create_autocmd("LspAttach", {
-                    group = vim.api.nvim_create_augroup("LspAttach_inlayhints",
-                                                        {}),
-                    callback = function(args)
-                        if not (args.data and args.data.client_id) then
-                            return
-                        end
-                        local client = vim.lsp.get_client_by_id(args.data
-                                                                    .client_id)
-                        if client.server_capabilities.inlayHintProvider then
-                            local inlayhints = require "lsp-inlayhints"
-                            inlayhints.on_attach(client, args.buf)
-                            require("astronvim.utils").set_mappings({
-                                n = {
-                                    ["<leader>uH"] = {
-                                        inlayhints.toggle,
-                                        desc = "Toggle inlay hints"
-                                    }
-                                }
-                            }, {buffer = args.buf})
-                        end
-                    end
-                })
-            end,
-            opts = {}
-        }, {
-            "p00f/clangd_extensions.nvim",
-            optional = true,
-            opts = {extensions = {autoSetHints = false}}
-        }, {
-            "simrat39/rust-tools.nvim",
-            optional = true,
-            opts = {tools = {inlay_hints = {auto = false}}}
-        }
-    }, {
         "henry-hsieh/riscv-asm-vim",
         event = "VeryLazy",
         opts = {},
         config = function() end
+    }, {
+        "aznhe21/actions-preview.nvim",
+        config = function()
+            vim.keymap.set({"v", "n"}, "gf",
+                           require("actions-preview").code_actions)
+        end
+    }, { --
+        {'kosayoda/nvim-lightbulb', config = true}
+    }, { --
+        {'gfanto/fzf-lsp.nvim', config = true}
+    }, { --
+        {
+            "ray-x/lsp_signature.nvim",
+            event = "VeryLazy",
+            opts = {},
+            config = function(_, opts)
+                require'lsp_signature'.setup(opts)
+            end
+        }
+    }, {
+        {
+            'rmagatti/goto-preview',
+            config = function() require('goto-preview').setup {} end
+        }
     }
 }

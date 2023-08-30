@@ -19,7 +19,7 @@ return {
         event = "VeryLazy",
         config = function()
             require("nvim-surround").setup({
-                -- Configuration here, or leave empty to use defaults
+                -- configuration here, or leave empty to use defaults
             })
         end
     }, --
@@ -106,110 +106,84 @@ return {
                 color_9 = {"#7d5c34", "smart"} -- Fallow brown
             }
         }
-    }, {"matze/vim-move", event = "BufEnter"}, {
-        "gbprod/yanky.nvim",
-        dependencies = {
-            {"kkharji/sqlite.lua", enabled = not jit.os:find "Windows"}
-        },
-        opts = function()
-            local mapping = require "yanky.telescope.mapping"
-            local mappings = mapping.get_defaults()
-            mappings.i["<c-p>"] = nil
-            return {
-                highlight = {timer = 200},
-                ring = {storage = jit.os:find "Windows" and "shada" or "sqlite"},
-                picker = {
-                    telescope = {
-                        use_default_mappings = false,
-                        mappings = mappings
-                    }
-                }
-            }
-        end,
-        keys = {
-            {
-                "<leader>p",
-                function()
-                    require("telescope").extensions.yank_history.yank_history {}
-                end,
-                desc = "Open Yank History"
-            },
-            {"y", "<Plug>(YankyYank)", mode = {"n", "x"}, desc = "Yank text"},
-            {
-                "p",
-                "<Plug>(YankyPutAfter)",
-                mode = {"n", "x"},
-                desc = "Put yanked text after cursor"
-            }, {
-                "P",
-                "<Plug>(YankyPutBefore)",
-                mode = {"n", "x"},
-                desc = "Put yanked text before cursor"
-            }, {
-                "gp",
-                "<Plug>(YankyGPutAfter)",
-                mode = {"n", "x"},
-                desc = "Put yanked text after selection"
-            }, {
-                "gP",
-                "<Plug>(YankyGPutBefore)",
-                mode = {"n", "x"},
-                desc = "Put yanked text before selection"
-            }, {
-                "[y",
-                "<Plug>(YankyCycleForward)",
-                desc = "Cycle forward through yank history"
-            }, {
-                "]y",
-                "<Plug>(YankyCycleBackward)",
-                desc = "Cycle backward through yank history"
-            }, {
-                "]p",
-                "<Plug>(YankyPutIndentAfterLinewise)",
-                desc = "Put indented after cursor (linewise)"
-            }, {
-                "[p",
-                "<Plug>(YankyPutIndentBeforeLinewise)",
-                desc = "Put indented before cursor (linewise)"
-            }, {
-                "]P",
-                "<Plug>(YankyPutIndentAfterLinewise)",
-                desc = "Put indented after cursor (linewise)"
-            }, {
-                "[P",
-                "<Plug>(YankyPutIndentBeforeLinewise)",
-                desc = "Put indented before cursor (linewise)"
-            },
-            {
-                ">p",
-                "<Plug>(YankyPutIndentAfterShiftRight)",
-                desc = "Put and indent right"
-            },
-            {
-                "<p",
-                "<Plug>(YankyPutIndentAfterShiftLeft)",
-                desc = "Put and indent left"
-            }, {
-                ">P",
-                "<Plug>(YankyPutIndentBeforeShiftRight)",
-                desc = "Put before and indent right"
-            }, {
-                "<P",
-                "<Plug>(YankyPutIndentBeforeShiftLeft)",
-                desc = "Put before and indent left"
-            },
-            {
-                "=p",
-                "<Plug>(YankyPutAfterFilter)",
-                desc = "Put after applying a filter"
-            },
-            {
-                "=P",
-                "<Plug>(YankyPutBeforeFilter)",
-                desc = "Put before applying a filter"
+    }, {"matze/vim-move", event = "BufEnter"},
+    {"jabirali/vim-tmux-yank", event = "User AstroFile"},
+    {"willothy/flatten.nvim", opts = {}, lazy = false, priority = 1001},
+    {"SmiteshP/nvim-navic", dependencies = "neovim/nvim-lspconfig"},
+    {'kosayoda/nvim-lightbulb', opts = {{'kosayoda/nvim-lightbulb'}}}, {
+        "onsails/lspkind.nvim",
+        opts = {
+            mode = 'symbol_text',
+            preset = 'codicons',
+            symbol_map = {
+                Text = "󰉿",
+                Method = "󰆧",
+                Function = "󰊕",
+                Constructor = "",
+                Field = "󰜢",
+                Variable = "󰀫",
+                Class = "󰠱",
+                Interface = "",
+                Module = "",
+                Property = "󰜢",
+                Unit = "󰑭",
+                Value = "󰎠",
+                Enum = "",
+                Keyword = "󰌋",
+                Snippet = "",
+                Color = "󰏘",
+                File = "󰈙",
+                Reference = "󰈇",
+                Folder = "󰉋",
+                EnumMember = "",
+                Constant = "󰏿",
+                Struct = "󰙅",
+                Event = "",
+                Operator = "󰆕",
+                TypeParameter = ""
             }
         }
-    }, {"jabirali/vim-tmux-yank", event = "User AstroFile"},
-    {"willothy/flatten.nvim", opts = {}, lazy = false, priority = 1001},
-    {"SmiteshP/nvim-navic", dependencies = "neovim/nvim-lspconfig"}
+    }, {
+        'ojroques/nvim-lspfuzzy',
+        dependencies = {
+            {'junegunn/fzf'}, {'junegunn/fzf.vim'} -- to enable preview (optional)
+        }
+    }, {"gfanto/fzf-lsp.nvim", event = "VeryLazy", opts = {}}, {
+        "ray-x/lsp_signature.nvim",
+        event = "VeryLazy",
+        opts = {},
+        config = function(_, opts) require'lsp_signature'.setup(opts) end
+    }, {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            {
+                "SmiteshP/nvim-navbuddy",
+                dependencies = {"SmiteshP/nvim-navic", "MunifTanjim/nui.nvim"},
+                opts = {lsp = {auto_attach = true}}
+            }
+        }
+    }, {"simrat39/symbols-outline.nvim", event = "VeryLazy", opts = {}}, {
+        'tomasky/bookmarks.nvim',
+        event = "VimEnter",
+        config = function() require('bookmarks').setup() end,
+        opts = {
+            save_file = vim.fn.expand "$HOME/.bookmarks", -- bookmarks save file path
+            keywords = {
+                ["@t"] = "☑️ ", -- mark annotation startswith @t ,signs this icon as `Todo`
+                ["@w"] = "⚠️ ", -- mark annotation startswith @w ,signs this icon as `Warn`
+                ["@f"] = "⛏ ", -- mark annotation startswith @f ,signs this icon as `Fix`
+                ["@n"] = " " -- mark annotation startswith @n ,signs this icon as `Note`
+            },
+            on_attach = function(bufnr)
+                local bm = require "bookmarks"
+                local map = vim.keymap.set
+                map("n", "mm", bm.bookmark_toggle) -- add or remove bookmark at current line
+                map("n", "mi", bm.bookmark_ann) -- add or edit mark annotation at current line
+                map("n", "mc", bm.bookmark_clean) -- clean all marks in local buffer
+                map("n", "mn", bm.bookmark_next) -- jump to next mark in local buffer
+                map("n", "mp", bm.bookmark_prev) -- jump to previous mark in local buffer
+                map("n", "ml", bm.bookmark_list) -- show marked file list in quickfix window
+            end
+        }
+    }
 }

@@ -46,5 +46,9 @@ return {
         init = function()
             vim.on_key(nil, vim.api.nvim_get_namespaces()["auto_hlsearch"])
         end
+    }, { --
+        {'AckslD/muren.nvim', config = true}
+    }, { --
+        {'nvim-pack/nvim-spectre', config = true}
     }
 }
