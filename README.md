@@ -34,11 +34,9 @@ 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
    ```shell
    export CROSS_COMPILE=/work/home/pfu/dev/.local/riscv-toolchain/bin/riscv64-unknown-linux-gnu-  # path to your own riscv toolchains
    
-   pushd ${WORK_SPACE}/fw_repos/u-boot
+   pushd ${WORK_SPACE}/fw_repos/u-boot=
    ## add following configs to configs/qemu-riscv64_smode_defconfig
-   ## CONFIG_RISCV_ISA_D=y
-   ## CONFIG_RISCV_ISA_C=y
-   ## CONFIG_CMODEL_MEDANY=y
+   echo '\nCONFIG_RISCV_ISA_D=y\nCONFIG_RISCV_ISA_C=y\nCONFIG_CMODEL_MEDANY=y' >> configs/qemu-riscv64_smode_defconfig
    make qemu-riscv64_smode_defconfig
    make -j32
    popd
