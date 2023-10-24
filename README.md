@@ -24,7 +24,7 @@ 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
    pushd ${WORK_SPACE}/3rd-resrcs
    wget https://www.openssl.org/source/openssl-1.1.1w.tar.gz
    tar xzvf openssl-1.1.1w.tar.gz
-   cd openssl-1.1.1w mkdir build
+   cd openssl-1.1.1w && mkdir build
    ./Configure linux-x86_64 --prefix="$(realpath ./build)"
    make -j32 && make install
    popd
