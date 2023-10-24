@@ -30,31 +30,31 @@ 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
    popd
    export PKG_CONFIG_PATH=${WORK_SPACE}/3rd-resrcs/openssl-1.1.1w/build/lib/pkgconfig:$PKG_CONFIG_PATH
    ```
-   ```shell
-diff --git a/configs/qemu-riscv32_smode_defconfig b/configs/qemu-riscv32_smode_defconfig
-index 0c7389e2f9..cb85807593 100644
---- a/configs/qemu-riscv32_smode_defconfig
-+++ b/configs/qemu-riscv32_smode_defconfig
-@@ -9,6 +9,9 @@ CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SYS_LOAD_ADDR=0x80200000
- CONFIG_TARGET_QEMU_VIRT=y
- CONFIG_RISCV_SMODE=y
-+CONFIG_RISCV_ISA_D=y
-+CONFIG_RISCV_ISA_C=y
-+CONFIG_CMODEL_MEDANY=y
- CONFIG_FIT=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_DISPLAY_CPUINFO=y
-diff --git a/tools/Makefile b/tools/Makefile
-index 1aa1e36137..98059da7df 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -168,6 +168,7 @@ ifdef CONFIG_TOOLS_LIBCRYPTO
- HOST_EXTRACFLAGS       += -DCONFIG_FIT_SIGNATURE
- HOST_EXTRACFLAGS       += -DCONFIG_FIT_SIGNATURE_MAX_SIZE=0xffffffff
- HOST_EXTRACFLAGS       += -DCONFIG_FIT_CIPHER
-+HOST_EXTRACFLAGS        += $(shell pkg-config --cflags libssl libcrypto 2> /dev/null || echo "")
- endif
+   ```diff
+   diff --git a/configs/qemu-riscv32_smode_defconfig b/configs/qemu-riscv32_smode_defconfig
+   index 0c7389e2f9..cb85807593 100644
+   --- a/configs/qemu-riscv32_smode_defconfig
+   +++ b/configs/qemu-riscv32_smode_defconfig
+   @@ -9,6 +9,9 @@ CONFIG_SYS_MONITOR_LEN=786432
+    CONFIG_SYS_LOAD_ADDR=0x80200000
+    CONFIG_TARGET_QEMU_VIRT=y
+    CONFIG_RISCV_SMODE=y
+   +CONFIG_RISCV_ISA_D=y
+   +CONFIG_RISCV_ISA_C=y
+   +CONFIG_CMODEL_MEDANY=y
+    CONFIG_FIT=y
+    CONFIG_DISTRO_DEFAULTS=y
+    CONFIG_DISPLAY_CPUINFO=y
+   diff --git a/tools/Makefile b/tools/Makefile
+   index 1aa1e36137..98059da7df 100644
+   --- a/tools/Makefile
+   +++ b/tools/Makefile
+   @@ -168,6 +168,7 @@ ifdef CONFIG_TOOLS_LIBCRYPTO
+    HOST_EXTRACFLAGS       += -DCONFIG_FIT_SIGNATURE
+    HOST_EXTRACFLAGS       += -DCONFIG_FIT_SIGNATURE_MAX_SIZE=0xffffffff
+    HOST_EXTRACFLAGS       += -DCONFIG_FIT_CIPHER
+   +HOST_EXTRACFLAGS        += $(shell pkg-config --cflags libssl libcrypto 2> /dev/null || echo "")
+    endif
    ```
    ```shell
    pushd ${WORK_SPACE}/fw_repos/u-boot
