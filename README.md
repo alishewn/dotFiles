@@ -30,13 +30,35 @@ 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
    popd
    export PKG_CONFIG_PATH=${WORK_SPACE}/3rd-resrcs/openssl-1.1.1w/build/lib/pkgconfig:$PKG_CONFIG_PATH
    ```
-
    ```shell
-   export CROSS_COMPILE=/work/home/pfu/dev/.local/riscv-toolchain/bin/riscv64-unknown-linux-gnu-  # path to your own riscv toolchains
-   
+   diff --git a/configs/qemu-riscv64_smode_defconfig b/configs/qemu-riscv64_smode_defconfig
+   index 1d0f021ade..cde1535b38 100644
+   diff --git a/configs/qemu-riscv64_smode_defconfig b/configs/qemu-riscv64_smode_defconfig
+   index 1d0f021ade..cde1535b38 100644
+   --- a/configs/qemu-riscv64_smode_defconfig
+   +++ b/configs/qemu-riscv64_smode_defconfig
+   @@ -25,3 +25,6 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+    CONFIG_DM_MTD=y
+    CONFIG_FLASH_SHOW_PROGRESS=0
+    CONFIG_SYS_MAX_FLASH_BANKS=2
+   +CONFIG_RISCV_ISA_D=y
+   +CONFIG_RISCV_ISA_C=y
+   +CONFIG_CMODEL_MEDANY=y
+   diff --git a/tools/Makefile b/tools/Makefile
+   index 1aa1e36137..208587a31c 100644
+   --- a/tools/Makefile
+   +++ b/tools/Makefile
+   @@ -168,6 +168,7 @@ ifdef CONFIG_TOOLS_LIBCRYPTO
+    HOST_EXTRACFLAGS       += -DCONFIG_FIT_SIGNATURE
+    HOST_EXTRACFLAGS       += -DCONFIG_FIT_SIGNATURE_MAX_SIZE=0xffffffff
+    HOST_EXTRACFLAGS       += -DCONFIG_FIT_CIPHER
+   +HOST_EXTRACFLAGS       += $(shell pkg-config --cflags libssl libcrypto 2> /dev/null || echo "")
+    endif
+
+   ```
+   ```shell
    pushd ${WORK_SPACE}/fw_repos/u-boot
-   ## add following configs to configs/qemu-riscv64_smode_defconfig
-   echo 'CONFIG_RISCV_ISA_D=y\nCONFIG_RISCV_ISA_C=y\nCONFIG_CMODEL_MEDANY=y' >> configs/qemu-riscv64_smode_defconfig
+   export CROSS_COMPILE=/work/home/pfu/dev/.local/riscv-toolchain/bin/riscv64-unknown-linux-gnu-  # path to your own riscv toolchains
    make qemu-riscv64_smode_defconfig
    make -j32
    popd
