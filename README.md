@@ -30,7 +30,8 @@ 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
    popd
    export PKG_CONFIG_PATH=${WORK_SPACE}/3rd-resrcs/openssl-1.1.1w/build/lib/pkgconfig:$PKG_CONFIG_PATH
    ```
-   ```diff
+   
+   ```shell
    diff --git a/configs/qemu-riscv32_smode_defconfig b/configs/qemu-riscv32_smode_defconfig
    index 0c7389e2f9..cb85807593 100644
    --- a/configs/qemu-riscv32_smode_defconfig
@@ -56,6 +57,7 @@ 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
    +HOST_EXTRACFLAGS        += $(shell pkg-config --cflags libssl libcrypto 2> /dev/null || echo "")
     endif
    ```
+   
    ```shell
    pushd ${WORK_SPACE}/fw_repos/u-boot
    export CROSS_COMPILE=/work/home/pfu/dev/.local/riscv-toolchain/bin/riscv64-unknown-linux-gnu-  # path to your own riscv toolchains
