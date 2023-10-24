@@ -174,12 +174,12 @@ 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
    # libslirp
    git clone https://gitlab.freedesktop.org/slirp/libslirp.git
    pushd libslirp
-   kdir build output
+   mkdir build output
    meson setup --prefix="$(realpath output)"  --buildtype=release build
    ninja -C build -j32
    ninja -C build install
    popd
-   export PKG_CONFIG_PATH=${WORK_SPACE}/3rd-resrcs/libslirp/output/lib/pkgconfig:$PKG_CONFIG_PATH
+   export PKG_CONFIG_PATH=${WORK_SPACE}/3rd-resrcs/libslirp/output/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
    
    popd
    ```
