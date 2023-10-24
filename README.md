@@ -36,7 +36,7 @@ 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
    
    pushd ${WORK_SPACE}/fw_repos/u-boot=
    ## add following configs to configs/qemu-riscv64_smode_defconfig
-   echo '\nCONFIG_RISCV_ISA_D=y\nCONFIG_RISCV_ISA_C=y\nCONFIG_CMODEL_MEDANY=y' >> configs/qemu-riscv64_smode_defconfig
+   echo 'CONFIG_RISCV_ISA_D=y\nCONFIG_RISCV_ISA_C=y\nCONFIG_CMODEL_MEDANY=y' >> configs/qemu-riscv64_smode_defconfig
    make qemu-riscv64_smode_defconfig
    make -j32
    popd
