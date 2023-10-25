@@ -214,7 +214,8 @@ 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
    -drive file=${WORK_SPACE}/3rd-resrcs/ubuntu-20.04.5-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio \
    -device virtio-rng-pci \
    -serial mon:stdio \
-   -device virtio-gpu-pci -full-screen  \
+   -device virtio-gpu-gl-pci \
+   -display gtk,gl=on,show-cursor=on \
    -device qemu-xhci \
    -device usb-kbd \
    -device usb-mouse
