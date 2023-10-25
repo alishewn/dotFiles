@@ -186,7 +186,9 @@ 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
 
    ```shell
    pushd ${WORK_SPACE}/fw_repos/qemu
-   ./configure --prefix="${WORK_SPACE}/fw_repos/qemu/build" --target-list=riscv64-softmmu --disable-docs --enable-debug-tcg --enable-debug --enable-debug-info -enable-trace-backends=log --enable-gtk --enable-kvm --enable-opengl --enable-slirp
+   ./configure --prefix="${WORK_SPACE}/fw_repos/qemu/build" --target-list=riscv64-softmmu --disable-docs --enable-debug-tcg \
+               --enable-debug --enable-debug-info -enable-trace-backends=log --enable-gtk --enable-kvm --enable-opengl --enable-slirp \
+               --enable-opengl --enable-virglrenderer --enable-sdl --enable-sdl-image
    make -j32 && make install
    popd
    ```
