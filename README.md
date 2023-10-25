@@ -128,7 +128,8 @@ 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
    mkdir build output
    meson setup --prefix="$(realpath output)"  --buildtype=release -Dman=true -Dbroadway_backend=true build
    popd
-   
+
+   ###### necessary dependencies ######
    # epoxy -> dependency of virgl
    git clone https://github.com/anholt/libepoxy.git
    pushd libepoxy
@@ -146,7 +147,7 @@ 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
    meson setup --prefix="$(realpath output)"  --buildtype=release build
    ninja -C build -j32
    ninja -C build install
-   popd
+   popd:
    export PKG_CONFIG_PATH=${WORK_SPACE}/3rd-resrcs/virglrenderer/output/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
    
    # sdl2
