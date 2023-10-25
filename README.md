@@ -226,7 +226,7 @@ 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
    ## once ubuntu booted, you may use ubuntu/ubuntu to login, close qemu and restart if the shell told you wrong passwd
    ## once logged in, change the apt repo sources
    sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
-   sudo sed -i "s/http:\/\/ports.ubuntu.com/http:\/\/mirrors.ustc.edu.cn\/ubuntu-ports/g" /etc/apt/sources.list
+   sudo sed -i "s/http:\/\/ports.ubuntu.com/http:\/\/mirrors.ustc.edu.cn/g" /etc/apt/sources.list
    ## here you can also add http(s)_proxy to your env virable to speed up the downloading process
    
    ## prepare the desktop environment. the procedure shall take a lot of time, wait patiently
