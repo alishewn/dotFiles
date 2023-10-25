@@ -250,20 +250,7 @@ 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
    
    ## prepare the desktop environment. the procedure shall take a lot of time, wait patiently
    sudo apt-get update
-   sudo apt-get install \
-     adwaita-icon-theme-full \
-     mutter \
-     gdm3 \
-     gnome \
-     gnome-shell-extension-appindicator \
-     gnome-shell-extension-desktop-icons-ng \
-     gnome-shell-extension-ubuntu-dock \
-     gnome-terminal \
-     network-manager-gnome \
-     ubuntu-gnome-wallpapers \
-     ubuntu-settings
-   ## set WaylandEnable=false in /etc/gdm3/custom.conf
-   sudo systemctl start gdm3
+   sudo apt-get install xfce4 lightdm
    ```
 
 7. runing Fedora 38 on Qemu with graphic env
