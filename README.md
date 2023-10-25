@@ -71,7 +71,8 @@ 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
    ```shell
    pushd ${WORK_SPACE}/fw_repos/opensbi
    make PLATFORM=generic PLATFORM_RISCV_ABI=lp64d PLATFORM_RISCV_ISA=rv64imafdc_zicsr_zifencei \
-   	PLATFORM_RISCV_XLEN=64 FW_PAYLOAD_PATH=${WORK_SPACE}/fw_repos/u-boot/u-boot.bin
+   	PLATFORM_RISCV_XLEN=64 \
+      # FW_PAYLOAD_PATH=${WORK_SPACE}/fw_repos/u-boot/u-boot.bin
    popd
    ```
 
@@ -212,6 +213,24 @@ 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
    -netdev user,id=net0 \
    -device virtio-net-device,netdev=net0 \
    -drive file=${WORK_SPACE}/3rd-resrcs/ubuntu-20.04.5-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio \
+   -device virtio-rng-pci \
+   -serial mon:stdio \
+   -device virtio-gpu-gl-pci \
+   -display gtk,gl=on,show-cursor=on \
+   -device qemu-xhci \
+   -device usb-kbd \
+   -device usb-mouse
+   popd
+   ```
+   ```shell
+   export OPENSBI=${WORK_SPACE}/fw_repos/opensbi/build/platform/generic/firmware/fw_dynamic.bin
+   pushd ${WORK_SPACE}/fw_repos/qemu/build
+   ./qemu-system-riscv64 -machine virt -m 8G -smp cpus=4 \
+   -bios ${WORK_SPACE}/3rd-resrcs/u-boot-spl.bin \
+   -device loader,file=${WORK_SPACE}/3rd-resrcs/u-boot.itb,addr=0x80200000
+   -netdev user,id=net0 \
+   -device virtio-net-device,netdev=net0 \
+   -drive file=${WORK_SPACE}/3rd-resrcs/openSUSE-Tumbleweed-RISC-V-XFCE-hifiveunmatched.riscv64-2023.10.11-Build1.17.raw,format=raw,if=virtio \
    -device virtio-rng-pci \
    -serial mon:stdio \
    -device virtio-gpu-gl-pci \
