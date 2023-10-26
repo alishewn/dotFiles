@@ -198,7 +198,7 @@ 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
       -drive file=${WORK_SPACE}/3rd-resrcs/ubuntu-20.04.5-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio \
       -device virtio-rng-pci \
       -serial mon:stdio \
-      -device virtio-gpu-pci \
+      -vga none -device virtio-gpu-pci \
       -display gtk,gl=on,show-cursor=on \
       -full-screen \
       -device qemu-xhci \
@@ -298,7 +298,7 @@ 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
       -drive file=${WORK_SPACE}/3rd-resrcs/openSUSE-Tumbleweed-RISC-V-XFCE.riscv64-rootfs.riscv64-2023.10.11-Build1.18.raw,format=raw,id=hd0 \
       -device virtio-rng-pci \
       -serial mon:stdio \
-      -device virtio-gpu-pci \
+      -vga none -device virtio-gpu-pci \
       -display gtk,gl=on,show-cursor=on \
       -full-screen \
       -device qemu-xhci \
