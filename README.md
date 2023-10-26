@@ -1,6 +1,3 @@
-# dotFiles
-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
-
 ## RISC-V Fedora on Qemu with Details
 
 - Make directories as you wish
@@ -279,12 +276,19 @@ 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
   notice that the `virtio-gpu-pci` module is not enabled in `openSUSE_kernel_defconfig`
 
   ```shell
-  pushd ${WORK_SPACE}/3rd-resrcs
+  
+  ```
+
+  hence we shall build the kernel manually with [buildroot](https://github.com/buildroot/buildroot.git) and replace the original one in the distro
+
+  ```shell
+  pushd ${WORK_SPACE}/fw_repos
+  git clone https://github.com/buildroot/buildroot.git
   git clone https://github.com/openSUSE/kernel.git
   popd
   ```
 
-  hence we shall build the kernel manually with [buildroot](https://github.com/buildroot/buildroot.git) and replace the original one in the distro
+  
 
   ```shell
   pushd ${WORK_SPACE}/fw_repos/qemu/build
@@ -311,5 +315,3 @@ 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
   ./run_opensuse.sh
   popd
   ```
-
-  
