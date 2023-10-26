@@ -40,7 +40,8 @@ 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
 
   ```shell
   pushd ${WORK_SPACE}/fw_repos/u-boot
-  export CROSS_COMPILE=/home/pennix/dev/local/riscv-gnu-toolchain/bin/riscv64-unknown-linux-gnu-  # path to your own riscv toolchains
+  # path to your own riscv toolchains
+  export CROSS_COMPILE=/home/pennix/dev/local/riscv-gnu-toolchain/bin/riscv64-unknown-linux-gnu-
   make qemu-riscv64_smode_defconfig
   make -j32
   popd
@@ -105,7 +106,8 @@ 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
   tar xJvf gtk+-3.24.37.tar.xz -C gtk3 --strip-components=1
   pushd gtk3
   mkdir build output
-  meson setup --prefix="$(realpath output)"  --buildtype=release -Dman=true -Dbroadway_backend=true build
+  meson setup --prefix="$(realpath output)"  --buildtype=release \
+              -Dman=true -Dbroadway_backend=true build
   popd
   
   # [epoxy] --> dependency of virglrenderer
