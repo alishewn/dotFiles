@@ -279,7 +279,9 @@ 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
   notice that the `virtio-gpu-pci` module is not enabled in `openSUSE_kernel_defconfig`
 
   ```shell
-  
+  pushd ${WORK_SPACE}/3rd-resrcs
+  git clone https://github.com/openSUSE/kernel.git
+  popd
   ```
 
   hence we shall build the kernel manually with [buildroot](https://github.com/buildroot/buildroot.git) and replace the original one in the distro
